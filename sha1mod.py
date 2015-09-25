@@ -31,8 +31,9 @@ def padding(msglen):
 # Input the original MAC, the length of the original message including the key,
 # and the message you want to add to the end.
 startHash = sys.argv[1]
-msgLen = int(sys.argv[2])
-hack = sys.argv[3]
+orgMsg = sys.argv[2]
+msgLen = int(sys.argv[3])
+hack = sys.argv[4]
 
 # Parse the MAC and divide it up into 5 chucks to use as the state for the sha1.
 iv = struct.unpack(">IIIII", startHash.decode('hex'))
@@ -47,8 +48,9 @@ h4 = iv[4]
 # This plus the original message (not including the key) will be the sent message.
 startMsg = padding(msgLen)
 startMsg += hack
+oM = orgMsg.encode('hex')
 
-print 'Message: {}'.format(startMsg.encode('hex'))
+print 'Message: {}{}'.format(oM, startMsg.encode('hex'))
 
 # Add the padding for the next block with the extended message.
 msg = hack
