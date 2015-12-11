@@ -6,7 +6,7 @@ class Generate(object):
 		
 		# Read in the users file of usernames and passwords
 		userList = {}
-		f = open('userListw.txt')
+		f = open('userListv.txt')
 		for user in f:
 			UserPassword = user.split()
 			userList[UserPassword[0]] = UserPassword[1]
@@ -15,7 +15,6 @@ class Generate(object):
 		print userList
 		
 		# Generate the password hasheds for the shadow file
-		salt = 'salt'
 		hashedPasswords = {}
 		for user in userList:
 			h = md5_crypt.encrypt(userList[user])
